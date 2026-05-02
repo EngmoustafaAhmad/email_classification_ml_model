@@ -76,7 +76,7 @@ The models were evaluated using:
 | Logistic Regression    | ~94–96%  | Strong and stable                      |
 | Random Forest          | ~92–94%  | Good ensemble performance              |
 | Naive Bayes            | ~90–93%  | Fast and efficient                     |
-| Decision Tree          | ~85%     | Lower due to data complexity           |
+| Decision Tree          | ~85%     | Lower due to data complexity and overfiting|
 
 ---
 
