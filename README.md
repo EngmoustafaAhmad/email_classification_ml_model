@@ -1,163 +1,106 @@
-# Bank Marketing Classification using Machine Learning
+# Spam Detection System using Machine Learning
 
-## Project Overview
+## Overview
+This project implements a Natural Language Processing (NLP) system to classify text messages as **Spam** or **Ham (Normal)**. The system applies multiple machine learning algorithms and compares their performance.
 
-This project aims to predict whether a bank client will subscribe to a term deposit based on marketing campaign data.
-
-It is a binary classification problem where:
-
-* 1 → Client subscribes
-* 0 → Client does not subscribe
-
-The project evaluates the impact of dimensionality reduction techniques on model performance.
+The goal is to build a robust spam detection model and provide a user-friendly interface for testing predictions.
 
 ---
 
-## Dataset Description
+## Project Objectives
+- Preprocess and clean text data
+- Extract meaningful features using TF-IDF
+- Train and evaluate multiple machine learning models
+- Compare model performance
+- Build a simple GUI for user interaction
 
-* Dataset: Bank Marketing Dataset
-* Total Records: 45,211
-* Train/Test Split: 80% / 20%
-* Test Samples: 9,043
+---
 
-### Class Distribution
-
-* No (0): ~88%
-* Yes (1): ~12%
-
-This indicates a highly imbalanced dataset.
+## Dataset
+- Source: Kaggle Email Spam Dataset
+- Records used: 100,000
+- Features:
+  - `body`: message text
+  - `label`: classification (0 = Spam, 1 = Ham)
 
 ---
 
 ## Data Preprocessing
+The following preprocessing steps were applied:
 
-* Replaced missing values ("unknown")
-* Applied median imputation for numerical features
-* Applied mode imputation for categorical features
-* Converted target variable (y) to binary
-* Applied one-hot encoding for categorical variables
-* Feature scaling using StandardScaler
-
----
-
-## Models Used
-
-### Random Forest
-
-* Ensemble model based on decision trees
-* Handles non-linear relationships
-* Provides feature importance
-* Uses class_weight="balanced" for imbalanced data
-
-### XGBoost
-
-* Gradient boosting algorithm
-* High performance and efficiency
-* Handles non-linear relationships
-* Uses scale_pos_weight to address class imbalance
+- Convert text to lowercase
+- Remove URLs
+- Remove numbers
+- Remove special characters
+- Remove extra whitespace
 
 ---
 
-## Dimensionality Reduction
+## Feature Extraction
+TF-IDF vectorization was used to convert text into numerical features:
 
-### Principal Component Analysis (PCA)
-
-* Retains 95% of the dataset variance
-* Reduces dimensionality while preserving important information
-
-### Feature Selection
-
-* Applied using SelectFromModel with Random Forest
-* Removes less important features based on importance scores
+- ngram_range = (1, 3)
+- max_df = 0.9
+- min_df = 2
+- max_features = 40000
+- sublinear_tf = True
 
 ---
 
-## Model Performance
+## Models Implemented
 
-### XGBoost Results
+The following machine learning models were trained and evaluated:
 
-| Model         | Accuracy | F1 Score |
-| ------------- | -------- | -------- |
-| XGBoost       | 0.8876   | 0.8964   |
-| XGBoost + PCA | 0.8911   | 0.8945   |
-
-### Random Forest Results
-
-| Model                  | Accuracy | F1 Score |
-| ---------------------- | -------- | -------- |
-| Random Forest          | 0.8657   | ~0.88    |
-| RF + PCA               | 0.8687   | ~0.88    |
-| RF + Feature Selection | 0.8607   | ~0.88    |
+1. Logistic Regression
+2. Support Vector Machine (SVM)
+3. Naive Bayes
+4. Decision Tree Classifier
+5. Random Forest Classifier
 
 ---
 
-## Evaluation Metrics
+## Model Evaluation
 
-* Accuracy
-* Recall
-* F1-score
-* Confusion Matrix
+The models were evaluated using:
 
----
+- Accuracy
+- Precision
+- Recall
+- F1-score
 
-## Visualizations
+### Performance Summary
 
-* Accuracy comparison (bar chart)
-* F1-score comparison
-* Confusion matrix heatmaps
-* Hyperparameter tuning heatmap
-
----
-
-## Hyperparameter Tuning
-
-* Applied using GridSearchCV
-* Tuned parameters:
-
-  * n_estimators
-  * max_depth
-
-A heatmap was used to visualize model performance across parameter combinations.
+| Model                  | Accuracy | Notes                                  |
+|------------------------|----------|----------------------------------------|
+| SVM                    | ~95–97%  | Best performance                       |
+| Logistic Regression    | ~94–96%  | Strong and stable                      |
+| Random Forest          | ~92–94%  | Good ensemble performance              |
+| Naive Bayes            | ~90–93%  | Fast and efficient                     |
+| Decision Tree          | ~85%     | Lower due to data complexity           |
 
 ---
 
-## Key Insights
+## System Architecture
 
-* XGBoost outperformed Random Forest
-* PCA slightly improved accuracy for both models
-* Feature selection did not significantly improve performance
-* Class imbalance affects minority class prediction
-
----
-
-## Conclusion
-
-* Best performing model: XGBoost with PCA
-* PCA reduced dimensionality while maintaining performance
-* Model selection and preprocessing play a critical role in performance
+1. User inputs a message
+2. Text preprocessing is applied
+3. TF-IDF transforms the text
+4. Each model predicts independently
+5. Results are displayed (Spam / Ham)
 
 ---
 
-## Technologies Used
+## User Interface
 
-* Python
-* Pandas, NumPy
-* Scikit-learn
-* XGBoost
-* Matplotlib, Seaborn
+A Streamlit-based interface was developed with:
 
----
-
-## Team Members
-
-* Moustafa
-* Yousef
-* Ahmed Masry
-* Mohamed
-* Ahmed Salah
+- Text input box
+- "Process" button
+- Outputs from all 5 models
+- Color-coded results:
+  - Green: Ham
+  - Red: Spam
 
 ---
 
-## Notes
 
-This project was developed as part of the Pattern Recognition course under the supervision of Dr. Yasmine.
