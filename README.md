@@ -68,6 +68,16 @@ The models were evaluated using:
 - Recall
 - F1-score
 
+## 📊 Confusion Matrix Terms (Spam Detection)
+
+|Meaning              | State                |
+| ------------------- | ---------------------|
+| True Positive (TP)  | Spam واتقال عليه Spam ✅ |
+| False Positive (FP) | Ham واتقال عليه Spam ❌  |
+| False Negative (FN) | Spam واتقال عليه Ham ❌  |
+| True Negative (TN)  | Ham واتقال عليه Ham ✅   |
+
+
 ### Performance Summary
 
 | Model                  | Accuracy | Notes                                  |
